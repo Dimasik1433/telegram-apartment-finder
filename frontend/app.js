@@ -251,4 +251,203 @@ function displayApartments(apartments) {
             <div class="apartment-info">
                 <div class="apartment-header">
                     <div class="apartment-title">${apartment.rooms}-комнатная квартира</div>
-                   
+                    <div class="apartment-price">${formattedPrice}</div>
+                </div>
+                
+                <div class="apartment-details">
+                    <span><i class="fas fa-ruler-combined"></i> ${apartment.area} м²</span>
+                    <span><i class="fas fa-layer-group"></i> ${apartment.floor || '?'}/${apartment.total_floors || '?'}</span>
+                    <span><i class="fas fa-map-marker-alt"></i> ${apartment.district}</span>
+                </div>
+                
+                <div class="apartment-address">
+                    <i class="fas fa-location-dot"></i> ${apartment.address || 'Адрес не указан'}
+                </div>
+                
+                <div class="apartment-actions">
+                    <button class="action-btn btn-primary" onclick="showDetails(${apartment.id})">
+                        <i class="fas fa-info-circle"></i> Подробнее
+                    </button>
+                    <button class="action-btn btn-secondary" onclick="saveFavorite(${apartment.id})">
+                        <i class="far fa-heart"></i> В избранное
+                    </button>
+                </div>
+            </div>
+        </div>
+        `;
+    });
+    
+    resultsContainer.innerHTML = html;
+}
+
+// Тестовые данные (заглушка)
+async function fetchMockApartments(filters) {
+    console.log("Используем тестовые данные с фильтрами:", filters);
+    
+    // Имитация задержки сети
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Тестовые данные
+    return [
+        {
+            id: 1,
+            rooms: 1,
+            area: 35.5,
+            price: 4500000,
+            district: "Центральный",
+            address: "ул. Ленина, 15",
+            floor: 3,
+            total_floors: 9,
+            images: [
+                "https://via.placeholder.com/600x400/3498db/ffffff?text=Квартира+1",
+                "https://via.placeholder.com/600x400/2ecc71/ffffff?text=Планировка"
+            ]
+        },
+        {
+            id: 2,
+            rooms: 2,
+            area: 52.0,
+            price: 6800000,
+            district: "Северный",
+            address: "пр. Победы, 42",
+            floor: 7,
+            total_floors: 12,
+            images: [
+                "https://via.placeholder.com/600x400/e74c3c/ffffff?text=Квартира+2"
+            ]
+        },
+        {
+            id: 3,
+            rooms: 3,
+            area: 75.5,
+            price: 9500000,
+            district: "Южный",
+            address: "ул. Садовая, 8",
+            floor: 1,
+            total_floors: 5,
+            images: [
+                "https://via.placeholder.com/600x400/9b59b6/ffffff?text=Квартира+3",
+                "https://via.placeholder.com/600x400/34495e/ffffff?text=Вид+из+окна"
+            ]
+        }
+    ].filter(apt => {
+        // Применяем фильтры
+        if (filters.min_price && apt.price < filters.min_price) return false;
+        if (filters.max_price && apt.price > filters.max_price) return false;
+        if (filters.rooms && !filters.rooms.split(',').includes(apt.rooms.toString())) return false;
+        if (filters.district && !apt.district.includes(filters.district)) return false;
+        return true;
+    });
+}
+
+// Сброс фильтров
+function resetFilters() {
+    console.log("🔄 Сброс фильтров");
+    
+    document.getElementById('minPrice').value = '';
+    document.getElementById('maxPrice').value = '';
+    document.getElementById('priceRange').value = 20000000;
+    document.getElementById('district').value = '';
+    
+    // Сброс выбора комнат
+    const roomButtons = document.querySelectorAll('.room-btn');
+    roomButtons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-rooms') === 'all') {
+            btn.classList.add('active');
+        }
+    });
+    
+    selectedRooms = [];
+    updatePriceLabel(20000000);
+    
+    // Очищаем результаты
+    document.getElementById('resultsContainer').innerHTML = `
+        <div class="empty-state">
+            <i class="fas fa-search fa-3x"></i>
+            <h3>Установите фильтры и нажмите "Найти квартиры"</h3>
+            <p>Мы покажем вам лучшие варианты из наших проектов</p>
+        </div>
+    `;
+    
+    document.getElementById('resultsCount').textContent = '0';
+}
+
+// Показать/скрыть загрузку
+function showLoading(show) {
+    const loadingElement = document.getElementById('loading');
+    const resultsContainer = document.getElementById('resultsContainer');
+    
+    if (show) {
+        loadingElement.style.display = 'block';
+        resultsContainer.style.opacity = '0.5';
+    } else {
+        loadingElement.style.display = 'none';
+        resultsContainer.style.opacity = '1';
+    }
+}
+
+// Показать ошибку
+function showError(message) {
+    const resultsContainer = document.getElementById('resultsContainer');
+    resultsContainer.innerHTML = `
+        <div class="empty-state">
+            <i class="fas fa-exclamation-triangle fa-3x"></i>
+            <h3>${message}</h3>
+            <p>Попробуйте еще раз позже</p>
+        </div>
+    `;
+}
+
+// Открыть модальное окно с изображением
+window.openImageModal = function(imageUrl) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    
+    modalImage.src = imageUrl;
+    modal.style.display = 'block';
+    
+    if (tg) {
+        tg.BackButton.show();
+    }
+}
+
+// Закрыть модальное окно
+function closeModal() {
+    document.getElementById('imageModal').style.display = 'none';
+    if (tg) {
+        tg.BackButton.hide();
+    }
+}
+
+// Показать детали квартиры
+window.showDetails = function(apartmentId) {
+    alert(`Детали квартиры #${apartmentId}\n\nЭта функция будет реализована в следующей версии.`);
+    
+    // В реальном приложении здесь будет переход на страницу деталей
+    // или отправка данных в бота для связи с менеджером
+}
+
+// Сохранить в избранное
+window.saveFavorite = function(apartmentId) {
+    alert(`Квартира #${apartmentId} добавлена в избранное!`);
+    
+    // Здесь можно добавить сохранение в localStorage или отправку на сервер
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    if (!favorites.includes(apartmentId)) {
+        favorites.push(apartmentId);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+    }
+    
+    console.log("Избранное:", favorites);
+}
+
+// Функция для отладки
+window.debugApp = function() {
+    console.log("=== ОТЛАДКА ===");
+    console.log("Текущие фильтры:", currentFilters);
+    console.log("Выбранные комнаты:", selectedRooms);
+    console.log("Текущий пользователь:", currentUser);
+    console.log("Telegram доступен:", !!tg);
+    console.log("=================");
+}
