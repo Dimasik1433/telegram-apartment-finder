@@ -3,117 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Поиск квартир | Группа Аквилон</title>
+    <title>Поиск квартир | @probniy_one_bot</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div id="app">
-        <!-- Шапка -->
         <header class="header">
-            <div class="header-content">
-                <h1><i class="fas fa-building"></i> Группа Аквилон</h1>
-                <p class="subtitle">Поиск квартир в новостройках</p>
-            </div>
-            <div class="user-info" id="userInfo"></div>
+            <h1><i class="fas fa-building"></i> Тестовый бот</h1>
+            <p class="subtitle">Поиск квартир | @probniy_one_bot</p>
         </header>
 
-        <!-- Фильтры -->
-        <section class="filters-section">
-            <h2><i class="fas fa-filter"></i> Фильтры поиска</h2>
-            
-            <div class="filter-group">
-                <label for="priceRange">Цена, руб.</label>
-                <div class="range-inputs">
-                    <input type="number" id="minPrice" placeholder="От">
-                    <span>—</span>
-                    <input type="number" id="maxPrice" placeholder="До">
+        <main>
+            <section class="apartments-section">
+                <h2><i class="fas fa-home"></i> Демо-квартиры</h2>
+                
+                <!-- Квартира 1 -->
+                <div class="apartment-card">
+                    <div class="apartment-image">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600" alt="1-комнатная">
+                    </div>
+                    <div class="apartment-info">
+                        <h3>1-комнатная квартира</h3>
+                        <div class="price">4 500 000 ₽</div>
+                        <div class="details">
+                            <span><i class="fas fa-ruler-combined"></i> 35 м²</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Центральный</span>
+                        </div>
+                    </div>
                 </div>
-                <input type="range" id="priceRange" min="0" max="20000000" step="500000" class="range-slider">
-                <div class="range-labels">
-                    <span>0</span>
-                    <span>20 млн</span>
+
+                <!-- Квартира 2 -->
+                <div class="apartment-card">
+                    <div class="apartment-image">
+                        <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=600" alt="2-комнатная">
+                    </div>
+                    <div class="apartment-info">
+                        <h3>2-комнатная квартира</h3>
+                        <div class="price">6 800 000 ₽</div>
+                        <div class="details">
+                            <span><i class="fas fa-ruler-combined"></i> 52 м²</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Северный</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
+        </main>
 
-            <div class="filter-group">
-                <label for="rooms">Количество комнат</label>
-                <div class="rooms-selector" id="roomsSelector">
-                    <button class="room-btn" data-rooms="1">1</button>
-                    <button class="room-btn" data-rooms="2">2</button>
-                    <button class="room-btn" data-rooms="3">3</button>
-                    <button class="room-btn" data-rooms="4">4+</button>
-                    <button class="room-btn active" data-rooms="all">Все</button>
-                </div>
-            </div>
-
-            <div class="filter-group">
-                <label for="district">Район</label>
-                <select id="district">
-                    <option value="">Все районы</option>
-                    <option value="Центральный">Центральный</option>
-                    <option value="Северный">Северный</option>
-                    <option value="Южный">Южный</option>
-                    <option value="Западный">Западный</option>
-                    <option value="Восточный">Восточный</option>
-                </select>
-            </div>
-
-            <button id="searchBtn" class="search-btn">
-                <i class="fas fa-search"></i> Найти квартиры
-            </button>
-            
-            <button id="resetBtn" class="reset-btn">
-                <i class="fas fa-redo"></i> Сбросить фильтры
-            </button>
-        </section>
-
-        <!-- Результаты -->
-        <section class="results-section">
-            <div class="results-header">
-                <h2><i class="fas fa-home"></i> Найденные варианты</h2>
-                <div class="results-count">
-                    Найдено: <span id="resultsCount">0</span>
-                </div>
-            </div>
-            
-            <div id="resultsContainer" class="results-container">
-                <!-- Сюда будут добавляться карточки квартир -->
-                <div class="empty-state">
-                    <i class="fas fa-search fa-3x"></i>
-                    <h3>Установите фильтры и нажмите "Найти квартиры"</h3>
-                    <p>Мы покажем вам лучшие варианты из наших проектов</p>
-                </div>
-            </div>
-            
-            <div id="loading" class="loading" style="display: none;">
-                <div class="spinner"></div>
-                <p>Ищем лучшие варианты...</p>
-            </div>
-        </section>
-
-        <!-- Подвал -->
         <footer class="footer">
-            <p>© Группа Аквилон. Все предложения актуальны на <span id="currentDate"></span></p>
-            <p class="contact-info">
-                <i class="fas fa-phone"></i> 8 (800) 123-45-67 |
-                <i class="fas fa-globe"></i> akvilon.ru
-            </p>
+            <p>Бот: @probniy_one_bot | GitHub: Dimasik1433/telegram-apartment-finder</p>
         </footer>
     </div>
 
-    <!-- Модальное окно для картинок -->
-    <div id="imageModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-body">
-                <img id="modalImage" src="" alt="">
-            </div>
-        </div>
-    </div>
-
     <script src="app.js"></script>
-    <script src="config.js"></script>
 </body>
 </html>
