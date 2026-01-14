@@ -4,8 +4,8 @@ from telegram import Update, WebAppInfo
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, CallbackContext
 
 # Получаем токен из переменных окружения или указываем прямо здесь
-BOT_TOKEN = os.getenv("BOT_TOKEN", "ВАШ_ТОКЕН_ЗДЕСЬ")  # Замените на ваш токен!
-WEB_APP_URL = "https://ВАШ_НИК.github.io/ВАШ_РЕПОЗИТОРИЙ"  # Ваш URL
+BOT_TOKEN = 8501696238:AAFgt9SjdWYNssUhA1VkX2vFMPZ_3Y45l7w  # Замените на ваш токен!
+WEB_APP_URL = "https://github.com/Dimasik1433/telegram-apartment-finder.git"  # Ваш URL
 
 # Команда /start
 async def start(update: Update, context: CallbackContext):
