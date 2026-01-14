@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск квартир | @probniy_one_bot</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <header class="header">
+            <h1><i class="fas fa-building"></i> Тестовый бот</h1>
+            <p class="subtitle">Поиск квартир | @probniy_one_bot</p>
+        </header>
+
+        <main>
+            <section class="apartments-section">
+                <h2><i class="fas fa-home"></i> Демо-квартиры</h2>
+                
+                <!-- Квартира 1 -->
+                <div class="apartment-card">
+                    <div class="apartment-image">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600" alt="1-комнатная">
+                    </div>
+                    <div class="apartment-info">
+                        <h3>1-комнатная квартира</h3>
+                        <div class="price">4 500 000 ₽</div>
+                        <div class="details">
+                            <span><i class="fas fa-ruler-combined"></i> 35 м²</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Центральный</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Квартира 2 -->
+                <div class="apartment-card">
+                    <div class="apartment-image">
+                        <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=600" alt="2-комнатная">
+                    </div>
+                    <div class="apartment-info">
+                        <h3>2-комнатная квартира</h3>
+                        <div class="price">6 800 000 ₽</div>
+                        <div class="details">
+                            <span><i class="fas fa-ruler-combined"></i> 52 м²</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Северный</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>Бот: @probniy_one_bot | GitHub: Dimasik1433/telegram-apartment-finder</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
