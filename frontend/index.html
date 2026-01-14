@@ -1,23 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <title>🏠 Поиск квартир</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск квартир | Группа Аквилон</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <div id="app">
-    <h1>🔍 Поиск квартир</h1>
-    <div class="filters">
-      <input type="number" placeholder="Цена до" id="price">
-      <select id="rooms">
-        <option>1 комната</option>
-        <option>2 комнаты</option>
-      </select>
-      <button onclick="search()">Найти</button>
+    <div id="app">
+        <!-- Шапка -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-building"></i> Группа Аквилон</h1>
+                <p class="subtitle">Поиск квартир в новостройках</p>
+            </div>
+            <div class="user-info" id="userInfo"></div>
+        </header>
+
+        <!-- Фильтры -->
+        <section class="filters-section">
+            <h2><i class="fas fa-filter"></i> Фильтры поиска</h2>
+            
+            <div class="filter-group">
+                <label for="priceRange">Цена, руб.</label>
+                <div class="range-inputs">
+                    <input type="number" id="minPrice" placeholder="От">
+                    <span>—</span>
+                    <input type="number" id="maxPrice" placeholder="До">
+                </div>
+                <input type="range" id="priceRange" min="0" max="20000000" step="500000" class="range-slider">
+                <div class="range-labels">
+                    <span>0</span>
+                    <span>20 млн</span>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label for="rooms">Количество комнат</label>
+                <div class="rooms-selector" id="roomsSelector">
+                    <button class="room-btn" data-rooms="1">1</button>
+                    <button class="room-btn" data-rooms="2">2</button>
+                    <button class="room-btn" data-rooms="3">3</button>
+                    <button class="room-btn" data-rooms="4">4+</button>
+                    <button class="room-btn active" data-rooms="all">Все</button>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label for="district">Район</label>
+                <select id="district">
+                    <option value="">Все районы</option>
+                    <option value="Центральный">Центральный</option>
+                    <option value="Северный">Северный</option>
+                    <option value="Южный">Южный</option>
+                    <option value="Западный">Западный</option>
+                    <option value="Восточный">Восточный</option>
+                </select>
+            </div>
+
+            <button id="searchBtn" class="search-btn">
+                <i class="fas fa-search"></i> Найти квартиры
+            </button>
+            
+            <button id="resetBtn" class="reset-btn">
+                <i class="fas fa-redo"></i> Сбросить фильтры
+            </button>
+        </section>
+
+        <!-- Результаты -->
+        <section class="results-section">
+            <div class="results-header">
+                <h2><i class="fas fa-home"></i> Найденные варианты</h2>
+                <div class="results-count">
+                    Найдено: <span id="resultsCount">0</span>
+                </div>
+            </div>
+            
+            <div id="resultsContainer" class="results-container">
+                <!-- Сюда будут добавляться карточки квартир -->
+                <div class="empty-state">
+                    <i class="fas fa-search fa-3x"></i>
+                    <h3>Установите фильтры и нажмите "Найти квартиры"</h3>
+                    <p>Мы покажем вам лучшие варианты из наших проектов</p>
+                </div>
+            </div>
+            
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Ищем лучшие варианты...</p>
+            </div>
+        </section>
+
+        <!-- Подвал -->
+        <footer class="footer">
+            <p>© Группа Аквилон. Все предложения актуальны на <span id="currentDate"></span></p>
+            <p class="contact-info">
+                <i class="fas fa-phone"></i> 8 (800) 123-45-67 |
+                <i class="fas fa-globe"></i> akvilon.ru
+            </p>
+        </footer>
     </div>
-    <div id="results"></div>
-  </div>
-  <script src="app.js"></script>
+
+    <!-- Модальное окно для картинок -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="">
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="config.js"></script>
 </body>
 </html>
