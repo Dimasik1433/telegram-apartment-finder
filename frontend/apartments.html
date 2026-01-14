@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>🏢 Жилые комплексы</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .complex-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .complex-image {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+        .status-new {
+            background: #d4edda;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏢 Жилые комплексы</h1>
+        <a href="index.html" class="btn">На главную</a>
+        
+        <div id="complexes-container">
+            <p>Загрузка данных...</p>
+        </div>
+    </div>
+    
+    <script>
+        // Загрузка жилых комплексов
+        fetch('https://raw.githubusercontent.com/dsmaznova-source/my-telegram-app2/main/complexes.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('complexes-container');
+                container.innerHTML = '';
+                
+                // Если данные в виде массива
+                const complexes = Array.isArray(data) ? data : [data];
+                
+                complexes.forEach(complex => {
+                    const card = document.createElement('div');
+                    card.className = 'complex-card';
+                    
+                    let imageHtml = '';
+                    if (complex.image) {
+                        imageHtml = `<img src="${complex.image}" alt="${complex.title}" class="complex-image">`;
+                    }
+                    
+                    let statusClass = 'status';
+                    if (complex.status && complex.status.includes('Новостройка')) {
+                        statusClass += ' status-new';
+                    }
+                    
+                    card.innerHTML = `
+                        <h2>${complex.title || 'Без названия'}</h2>
+                        <p><strong>Район:</strong> ${complex.district || 'Не указан'}</p>
+                        <p><strong>Статус:</strong> <span class="${statusClass}">${complex.status || 'Не указан'}</span></p>
+                        ${imageHtml}
+                    `;
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => {
+                console.error('Ошибка загрузки:', error);
+                document.getElementById('complexes-container').innerHTML = 
+                    '<p style="color: red;">Ошибка загрузки данных: ' + error.message + '</p>';
+            });
+    </script>
+</body>
+</html>
