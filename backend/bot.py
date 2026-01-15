@@ -10,7 +10,7 @@ import json
 # Настройки
 BOT_TOKEN = "8501696238:AAFgt9SjdWYNssUhA1VkX2vFMPZ_3Y45l7w"
 FEED_URL = "https://raw.githubusercontent.com/dsmaznova-source/my-telegram-app2/refs/heads/main/complexes.json"
-WEB_APP_URL = "https://super-space-waddle-97v9x67jjqx9cpwg6.github.dev"  # URL веб-приложения
+WEB_APP_URL = "https://super-space-waddle-97v9x67jjqx9cpwg6-8080.app.github.dev"  # URL веб-приложения
 
 # Инициализация
 bot = Bot(token=BOT_TOKEN)
