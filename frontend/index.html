@@ -3,50 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏠 Выбор застройщика</title>
+    <title>🏠 Новостройки Санкт-Петербурга</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            padding: 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            min-height: 100vh;
+            padding: 20px;
+            background: #f5f5f5;
         }
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
+            background: white;
             padding: 30px;
-            border-radius: 20px;
-            color: #333;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
         h1 {
-            color: #4A00E0;
+            color: #2c3e50;
             text-align: center;
         }
-        .developer-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
+        .complex {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
             margin: 20px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-left: 5px solid #8E2DE2;
+        }
+        .complex h3 {
+            color: #2980b9;
+            margin-top: 0;
         }
         .btn {
-            background: linear-gradient(to right, #4A00E0, #8E2DE2);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
             display: inline-block;
-            margin: 10px;
-            cursor: pointer;
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 5px;
         }
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(142, 45, 226, 0.3);
+            background: #2980b9;
         }
         .telegram-btn {
             background: #0088cc;
@@ -55,59 +52,46 @@
 </head>
 <body>
     <div class="container">
-        <h1>🏠 Выбор застройщика</h1>
-        <p>Телеграм бот: <a href="https://t.me/probniy_one_bot" target="_blank">@probniy_one_bot</a></p>
-        <p>Веб-приложение запущено на порту: 8080</p>
+        <h1>🏠 Новостройки Санкт-Петербурга</h1>
+        <p>Выберите жилой комплекс:</p>
         
-        <div class="developer-card">
-            <h2>🏢 Аквилон</h2>
-            <p>Выберите жилой комплекс:</p>
-            
-            <button class="btn" onclick="selectComplex('Аквилон All in 3.0')">
-                Аквилон All in 3.0
+        <div class="complex">
+            <h3>🏢 Аквилон All in 3.0</h3>
+            <p><strong>Район:</strong> Санкт-Петербург, Пушкинский район</p>
+            <p><strong>Статус:</strong> Новостройка</p>
+            <p><strong>Квартир:</strong> 106</p>
+            <button class="btn" onclick="showDetails('Аквилон All in 3.0')">
+                Выбрать квартиру
             </button>
-            
-            <button class="btn" onclick="selectComplex('Аквилон Янино')">
-                Аквилон Янино
+        </div>
+        
+        <div class="complex">
+            <h3>🏢 Аквилон Янино</h3>
+            <p><strong>Район:</strong> Ленинградская область</p>
+            <p><strong>Статус:</strong> Новостройка</p>
+            <p><strong>Квартир:</strong> 303</p>
+            <button class="btn" onclick="showDetails('Аквилон Янино')">
+                Выбрать квартиру
             </button>
-            
-            <div style="margin-top: 20px;">
-                <p>Количество квартир:</p>
-                <ul>
-                    <li>Аквилон All in 3.0: 106 квартир</li>
-                    <li>Аквилон Янино: 303 квартиры</li>
-                </ul>
-            </div>
         </div>
         
         <div style="text-align: center; margin-top: 30px;">
             <a href="https://t.me/probniy_one_bot" class="btn telegram-btn" target="_blank">
-                🤖 Открыть Telegram бота
+                🤖 Наш Telegram бот
             </a>
-            
-            <button class="btn" onclick="openMap()">
-                🗺️ Показать на карте
-            </button>
         </div>
         
-        <footer style="text-align: center; margin-top: 40px; color: #666;">
-            <p>© 2024 Новостройки Санкт-Петербурга</p>
-            <p>URL: https://super-space-waddle-97v9x67jjqx9cpwg6-8080.app.github.dev</p>
-        </footer>
+        <div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+            <h3>📞 Контакты</h3>
+            <p>Telegram бот: <a href="https://t.me/probniy_one_bot">@probniy_one_bot</a></p>
+            <p>Для подбора квартиры нажмите кнопку "Выбрать квартиру" выше</p>
+        </div>
     </div>
     
     <script>
-        function selectComplex(name) {
-            alert('Вы выбрали: ' + name + '\n\nВ будущем здесь будет переход к выбору квартир');
+        function showDetails(complexName) {
+            alert('Вы выбрали: ' + complexName + '\n\nНаш менеджер свяжется с вами в Telegram!');
         }
-        
-        function openMap() {
-            alert('Здесь будет открыта Яндекс.Карта с расположением жилых комплексов');
-        }
-        
-        // Проверка загрузки страницы
-        console.log('Веб-приложение загружено!');
-        console.log('Telegram бот: @probniy_one_bot');
     </script>
 </body>
 </html>
