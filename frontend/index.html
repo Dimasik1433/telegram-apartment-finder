@@ -1,1 +1,113 @@
-<h1>Тест работает!</h1><p>Port 8080</p>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏠 Выбор застройщика</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            color: #333;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #4A00E0;
+            text-align: center;
+        }
+        .developer-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #8E2DE2;
+        }
+        .btn {
+            background: linear-gradient(to right, #4A00E0, #8E2DE2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(142, 45, 226, 0.3);
+        }
+        .telegram-btn {
+            background: #0088cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏠 Выбор застройщика</h1>
+        <p>Телеграм бот: <a href="https://t.me/probniy_one_bot" target="_blank">@probniy_one_bot</a></p>
+        <p>Веб-приложение запущено на порту: 8080</p>
+        
+        <div class="developer-card">
+            <h2>🏢 Аквилон</h2>
+            <p>Выберите жилой комплекс:</p>
+            
+            <button class="btn" onclick="selectComplex('Аквилон All in 3.0')">
+                Аквилон All in 3.0
+            </button>
+            
+            <button class="btn" onclick="selectComplex('Аквилон Янино')">
+                Аквилон Янино
+            </button>
+            
+            <div style="margin-top: 20px;">
+                <p>Количество квартир:</p>
+                <ul>
+                    <li>Аквилон All in 3.0: 106 квартир</li>
+                    <li>Аквилон Янино: 303 квартиры</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="https://t.me/probniy_one_bot" class="btn telegram-btn" target="_blank">
+                🤖 Открыть Telegram бота
+            </a>
+            
+            <button class="btn" onclick="openMap()">
+                🗺️ Показать на карте
+            </button>
+        </div>
+        
+        <footer style="text-align: center; margin-top: 40px; color: #666;">
+            <p>© 2024 Новостройки Санкт-Петербурга</p>
+            <p>URL: https://super-space-waddle-97v9x67jjqx9cpwg6-8080.app.github.dev</p>
+        </footer>
+    </div>
+    
+    <script>
+        function selectComplex(name) {
+            alert('Вы выбрали: ' + name + '\n\nВ будущем здесь будет переход к выбору квартир');
+        }
+        
+        function openMap() {
+            alert('Здесь будет открыта Яндекс.Карта с расположением жилых комплексов');
+        }
+        
+        // Проверка загрузки страницы
+        console.log('Веб-приложение загружено!');
+        console.log('Telegram бот: @probniy_one_bot');
+    </script>
+</body>
+</html>
